@@ -6,11 +6,10 @@ FROM centos:centos7
 RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 ADD ./CentOS7-Base-163.repo  /etc/yum.repos.d/CentOS-Base.repo
 
-RUN yum clean all
 RUN yum install -y yum-plugin-ovl || true
-RUN yum install -y  openssh-server vim tar wget curl rsync bzip2 iptables tcpdump less telnet net-tools lsof sysstat cronie python-setuptools git
+RUN yum install -y  openssh-server vim tar wget curl rsync bzip2 iptables tcpdump less telnet net-tools lsof sysstat cronie python-setuptools git easy_install supervisor
 RUN yum clean all
-RUN easy_install supervisor
+
 
 #   更改时区
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -37,5 +36,5 @@ COPY sshd.conf /etc/supervisor/conf.d/sshd.conf
 
 
 
-## docker build . -t centos7:tools
+## docker build . -t centos7-tools
 
